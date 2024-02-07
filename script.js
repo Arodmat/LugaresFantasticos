@@ -74,17 +74,29 @@ function initScrollSuave(){
 
 initScrollSuave();
 
-const sections = document.querySelectorAll('.js-scroll');
-const windowMetade = window.innerHeight * 0.6;
+function initAnimacaoScroll(){
+  
+  const sections = document.querySelectorAll('.js-scroll');
 
-function animaScroll(){
-  sections.forEach((section) => {
-    const sectiontop = section.getBoundingClientRect().top;
-    if(sectiontop < 0){
-      section.classList.add('ativo');
-    }
-  })
+  if(sections.length){ //se a sections existe fazer toda a animação
+      const windowMetade = window.innerHeight * 0.8;
+
+      function animaScroll(){
+        sections.forEach((section) => {
+          const sectiontop = section.getBoundingClientRect().top;
+          const isSectionVisible = (sectiontop - windowMetade) < 0;
+          if(isSectionVisible){
+            section.classList.add('ativo');
+          }
+          else{
+            section.classList.remove('ativo');
+          }
+        })
+      }
 }
 
+animaScroll();
 window.addEventListener('scroll', animaScroll);
+}
+initAnimacaoScroll();
 
